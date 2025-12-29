@@ -1,4 +1,4 @@
-import React from 'react'
+// import React from 'react'
 import { Link } from 'react-router'
 
 const Navbar = () => {
@@ -14,4 +14,4 @@ const Navbar = () => {
   )
 }
 
-export default Navbar
+export default Navbar;
