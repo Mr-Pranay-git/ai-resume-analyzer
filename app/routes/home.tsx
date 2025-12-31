@@ -3,6 +3,7 @@ import type { Route } from "./+types/home";
 import { resumes } from "~/constants";
 import { resume } from "react-dom/server";
 import ResumeCard from "~/components/ResumeCard";
+import type { ReactNode } from "react";
 
 
 export function meta({}: Route.MetaArgs) {
@@ -16,8 +17,7 @@ export default function Home() {
   function callbackfn(value: Resume, index: number, array: Resume[]): ReactNode {
     throw new Error("Function not implemented.");
   }
-  console.log(resumes)
-  console.log(resumes[0])
+
   return <main className="bg-[url('/images/bg-main.svg')] bg-cover">
     <Navbar/>
 
