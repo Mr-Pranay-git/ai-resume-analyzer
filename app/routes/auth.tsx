@@ -1,4 +1,5 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { useLocation, useNavigate } from "react-router";
 import { usePuterStore } from "~/lib/puter";
 
 export const meta = ()=>([
@@ -8,6 +9,14 @@ export const meta = ()=>([
 
 const Auth = () => {
     const {isLoading, auth}= usePuterStore();
+    const loaction = useLocation();
+    const next = location.search.split('next=')[1]
+    const navigate = useNavigate();
+
+    useEffect(()=>{
+        if(auth.isAuthenticated) navigate(next);
+    },[auth.isAuthenticated, next])
+
   return (
     <main className="bg-[url('/images/bg-auth.svg')] bg-cover min-h-screen flex items-center justify-center">
         <div className="gradient-border shadow-lg">
@@ -18,7 +27,7 @@ const Auth = () => {
                 </div>
                 <div>
                     {isLoading ? (
-                        <button>
+                        <button className="auth-button animate-pulse">
                             <p>
                                 Signing you In...
                             </p>
@@ -26,18 +35,20 @@ const Auth = () => {
                     ): (
                         <>
                             {auth.isAuthenticated ? (
-                                <button>
+                                <button className="auth-button" onClick={auth.signOut}>
                                     <p>
                                         Log Out
                                     </p>
                                 </button>
                             ):
                             (
-                                <p>
-                                    <button>
-                                        Log In
+                                
+                                    <button className="auth-button" onClick={auth.signIn} >
+                                       <p>
+                                            Log In
+                                       </p>
                                     </button>
-                                </p>
+                                
                             )
                         }
                         </>
