@@ -15,7 +15,8 @@ const Auth = () => {
     useEffect(()=>{
         if(auth.isAuthenticated) navigate(next);
     },[auth.isAuthenticated, next])
-
+        console.log(navigate);
+        
   return (
     <main className="bg-[url('/images/bg-auth.svg')] bg-cover min-h-screen flex items-center justify-center">
         <div className="gradient-border shadow-lg">
