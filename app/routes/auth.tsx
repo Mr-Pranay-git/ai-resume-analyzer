@@ -8,13 +8,25 @@
     ])
 
     const Auth = () => {
+        // -------------More Effieicent------------------------------------
         const {isLoading, auth} = usePuterStore();
         const location = useLocation();
-        const next = location.search.split('next=')[1];
+        const next = new URLSearchParams(location.search).get("next") || '/'
         const navigate = useNavigate();
         useEffect(()=>{
-            if(auth.isAuthenticated) navigate(next);
+            if(auth.isAuthenticated) {
+                navigate(next,{replace: true});
+            }
         },[auth.isAuthenticated, next])
+
+        //----------------------OR(tutorials auth system)-----------------------------
+        // const {isLoading, auth} = usePuterStore();
+        // const location = useLocation();
+        // const next = location.search.split('next=')[1];
+        // const navigate = useNavigate();
+        // useEffect(()=>{
+        //     if(auth.isAuthenticated) navigate(next);
+        // },[auth.isAuthenticated, next])
             
             return (
                 <main className="bg-[url('/images/bg-auth.svg')] bg-cover min-h-screen flex items-center justify-center">
