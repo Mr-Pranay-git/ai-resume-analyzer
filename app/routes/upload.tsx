@@ -1,19 +1,52 @@
-import React, { useState } from 'react'
+import React, { useState, type FormEvent } from 'react'
+import FileUploader from '~/components/FileUploader'
 import Navbar from '~/components/Navbar'
 
 const Upload = () => {
-    const [isProcessing,setIsProcessing] = useState(true)
+    const [isProcessing,setIsProcessing] = useState(false)
+    const [statusText, setStatusText] = useState("")
+    const handleSubmit = (e:FormEvent<HTMLFormElement>)=>{
+        
+    }
+
   return (
      <main className="bg-[url('/images/bg-main.svg')] bg-cover">
     <Navbar/>
 
     <section className="main-section">
-        <div className="page-header">
+        <div className="page-header py-16">
             <h1>Smart feedback for your dream job </h1>
             {isProcessing ? (
-                <img src="/images/resume-scan.gif" alt="" />
+                <>
+                    <h2>{statusText}</h2>
+                    <img src="/images/resume-scan.gif" alt="" /> 
+                </>
             ):(
-                <h2>drop your resume for ATS score and important links</h2>
+                <h2>Drop your resume for ATS Score and improvement tips</h2>
+            )}
+            {!isProcessing && (
+                <form id='upload-form' onSubmit={handleSubmit} className='flex flex-col gap-4 mt-8'>
+                    <div className="form-div">
+                        <label htmlFor="company-name">Company Name</label>
+                        <input type="text" name="company-name" placeholder='Company Name' id='company-name' />
+                    </div>
+                    <div className="form-div">
+                        <label htmlFor="job-title">Job Title</label>
+                        <input type='text' name="job-title" placeholder='Job Title' id='job-title' />
+                    </div>
+                    <div className="form-div">
+                        <label htmlFor="job-description">Job Description</label>
+                        <textarea rows={5} name="job-description" placeholder='Job Description' id='job-description' />
+                    </div>
+                    <div className="form-div">
+                        <label htmlFor="uploader">Uploader Resume</label>
+                        <FileUploader/>
+                    </div>
+                    
+                    <button className='primary-button' type='submit'>
+                        Analyzer Resume
+                    </button>
+                </form>
             )}
         </div>
     </section>
@@ -21,4 +54,5 @@ const Upload = () => {
   )
 }
 
-export default Upload
+export default Upload;
+

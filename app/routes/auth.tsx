@@ -8,7 +8,7 @@
     ])
 
     const Auth = () => {
-        // -------------More Effieicent------------------------------------
+        // -------------More Efficient------------------------------------
         const {isLoading, auth} = usePuterStore();
         const location = useLocation();
         const next = new URLSearchParams(location.search).get("next") || '/'
@@ -18,6 +18,9 @@
                 navigate(next,{replace: true});
             }
         },[auth.isAuthenticated, next])
+
+        // console.log(location);
+        
 
         //----------------------OR(tutorials auth system)-----------------------------
         // const {isLoading, auth} = usePuterStore();
