@@ -1,11 +1,24 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 
-const FileUploader = () => {
-    const onDrop = useCallback(acceptedFiles => {
-        // Do something with the files
-    }, [])
-    const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
+interface FileUploaderProps{
+    onFileSelect?:(file:File | null )=> void;
+}
+
+const FileUploader = ({onFileSelect}: FileUploaderProps) => {
+    const [file, setFile] = useState();
+    const onDrop = useCallback((acceptedFiles: File[]) => {
+        const file :File = acceptedFiles[0] || null
+        onFileSelect?.(file)
+    }, [onFileSelect]);
+    const { getRootProps, getInputProps, isDragActive, acceptedFiles } = useDropzone({ 
+        onDrop,
+        multiple: false,
+        accept:{'application/pdf':['.pdf']},
+        maxSize:20*1024*1024,
+     })
+
+     const File = acceptedFiles[0] || null;     
 
     return (
         <div className='w-full gradient-border'>
@@ -16,6 +29,18 @@ const FileUploader = () => {
                     <div className='mx-auto w-16 h-16 flex items-center justify-center'>
                         <img src="/icons/info.svg" alt="upload" className='size-20' />
                     </div>
+
+                    {file ?(
+                        <div>
+
+                        </div>
+                    ):(
+                        <div>
+                            <p className='text-lg text-gray-500'>
+                                <span className=''></span>
+                            </p>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>
