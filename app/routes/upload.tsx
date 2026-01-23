@@ -21,8 +21,9 @@ const Upload = () => {
         const jobTitle = formData.get('job-title');
         const jobDescription = formData.get('job-description');
 
-        console.log({companyName, jobTitle, jobDescription, file});
+        // console.log({companyName, jobTitle, jobDescription, file});
         
+        if (!file) return;
     }
 
   return (
