@@ -2,7 +2,9 @@ import React, { useState, type FormEvent } from 'react'
 import { useNavigate } from 'react-router'
 import FileUploader from '~/components/FileUploader'
 import Navbar from '~/components/Navbar'
+import { convertPdfToImage } from '~/lib/pdf2img'
 import { usePuterStore } from '~/lib/puter'
+import { generateUUID } from '~/lib/utils'
 
 const Upload = () => {
     const {auth, isLoading, fs, ai, kv} = usePuterStore()
@@ -23,7 +25,22 @@ const Upload = () => {
         if(!uploadedFile) return setStatusText('Error: Failed to upload file');
 
         setStatusText('Converting to image...');
-        // const imageFile = await convertPdfToImage(file);
+        const imageFile = await convertPdfToImage(file);
+        if(!imageFile.file) return setStatusText('Error: Failed to convert PDF to image.')
+
+            setStatusText('Upload the image...');
+            const uploadedImage = await fs.upload([imageFile.file]);
+            if(!uploadedImage) return setStatusText('Error: failed to upload image');
+
+            const uuid = generateUUID();
+            const data ={
+                id:uuid,
+                resumePath: uploadedFile.path,
+                imagePath : uploadedImage.path,
+                companyName,jobTitle,jobDescription,
+                feedback:'',
+            }
+            // await kv.set(`resume:${uuid}, JSON.stringify(data)`)
     }
 
     const handleSubmit = (e:FormEvent<HTMLFormElement>)=>{
