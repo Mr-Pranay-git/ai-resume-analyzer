@@ -13,7 +13,7 @@ const Category = ({title, score}: {title:string, score: number}) =>{
           <ScoreBadge score={score} />
         </div>
         <p className="text-2xl">
-          <span className={textColor}>{score}</span>
+          <span className={textColor}>{score}/100</span>
         </p>
       </div>
     </div>
@@ -29,7 +29,7 @@ const Summary = ({feedback}:{feedback: Feedback}) => {
         <div className="flex flex-col gap-2">
           <h2 className='text-2xl font-bold'>Your Resume Score</h2>
           <p className="text-sm text-gray-500">
-            This score is calculated based on the vRIbles listed below.
+            This score is calculated based on the Variables listed below.
           </p>
         </div>
       </div>            

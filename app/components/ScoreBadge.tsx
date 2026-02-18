@@ -5,7 +5,7 @@ type ScoreBadgeProps = {
 const ScoreBadge = ({ score }: ScoreBadgeProps) => {
 	const badgeClasses =
 		score > 70
-			? 'bg-badge-green text-green-600'
+			? 'bg-badge-green text-green-700'
 			: score > 49
 			? 'bg-badge-yellow text-yellow-600'
 			: 'bg-badge-red text-red-600';
