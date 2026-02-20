@@ -3,9 +3,10 @@ import type { Route } from "./+types/home";
 import { resumes } from "~/constants/index";
 // \app\constants\index.ts
 import ResumeCard from "~/components/ResumeCard";
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { usePuterStore } from "~/lib/puter";
 import { useNavigate } from "react-router";
+import { resume } from "react-dom/server";
 
 
 export function meta({}: Route.MetaArgs) {
@@ -19,8 +20,8 @@ export default function Home() {
   function callbackfn(value: Resume, index: number, array: Resume[]): ReactNode {
     throw new Error("Function not implemented.");
   }
-  const {auth} = usePuterStore() 
-  const navigate = useNavigate() 
+  const {auth} = usePuterStore(); 
+  const navigate = useNavigate();
   
   useEffect(()=>{
     if(!auth.isAuthenticated) navigate('/auth?next=/')
