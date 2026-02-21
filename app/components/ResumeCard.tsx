@@ -23,14 +23,15 @@ const ResumeCard = ({resume:{id,companyName,jobTitle, feedback, imagePath}}:{res
     <Link to={`/resume/${id}`} className="resume-card animate-in fade-in duration-1000">
       <div className="resume-card-header">
         <div className='flex flex-col gap-2 '>
-        <h2 className=' text-black! font-bold wrap-break-word'>{companyName ?? "Unknown Company"}</h2>
-        <h3 className="text-lg wrap-break-word text-gray-500">{jobTitle ?? "Unknown Role"}</h3>
+        {companyName && <h2 className=' text-black! font-bold wrap-break-word'>{companyName ?? "Unknown Company"}</h2>}
+        {jobTitle && <h3 className="text-lg wrap-break-word text-gray-500">{jobTitle ?? "Unknown Role"}</h3>}
+        {!companyName && !jobTitle && <h2 className='text-black! font-bold'>Resume</h2>}
       </div>
       <div className="shrink-0">
           <ScoreCircle score={feedback.overallScore}/> 
       </div>
       </div>
-      <div className="gradient-border animate-in fade-in duration-1000">
+      {resumeUrl && (<div className="gradient-border animate-in fade-in duration-1000">
         <div className='w-full h-full'>
           <img
               src={imagePath}
@@ -38,8 +39,8 @@ const ResumeCard = ({resume:{id,companyName,jobTitle, feedback, imagePath}}:{res
               className='w-full h-87.5 max-sm:h-50 object-cover object-top'
           />
         </div>
-
       </div>
+      )}
       
     </Link>
   )

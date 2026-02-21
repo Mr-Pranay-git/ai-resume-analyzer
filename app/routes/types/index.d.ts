@@ -6,6 +6,7 @@ interface Job {
 }
 
 interface Resume {
+  value(value: any): Resume;
   id: string;
   companyName?: string;
   jobTitle?: string;
