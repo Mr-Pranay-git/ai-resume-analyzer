@@ -35,7 +35,7 @@ const WipeApp = () => {
     }
 
     if (error) {
-        return <div>Error {error}</div>;
+        return <div>Error: {error}</div>;
     }
 
     return (
